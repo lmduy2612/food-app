@@ -1,5 +1,5 @@
 {
-  "name": "foodApp",
+  "name": "food-ordering-app",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,9 +10,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-navigation/native": "^5.9.3",
     "native-base": "^2.15.2",
     "react": "16.13.1",
-    "react-native": "0.63.4"
+    "react-native": "0.63.4",
+    "react-native-swiper": "^1.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.1",
