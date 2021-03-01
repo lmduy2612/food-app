@@ -170,7 +170,7 @@ const HomeScreen = () => {
         <View style={styles.iconsList}>
           <View style={styles.iconCategory}>
             <View style={styles.iconItem}>
-              <Ionicons name="ios-restaurant" size={25} color="#FF6347" />
+              <MaterialIcons name="food-bank" size={25} color="#FF6347" />
             </View>
             <Text>Restaurant</Text>
           </View>
@@ -194,7 +194,7 @@ const HomeScreen = () => {
         <View style={styles.iconsList}>
           <View style={styles.iconCategory}>
             <View style={styles.iconItem}>
-              <Fontisto name="hotel" size={25} color="#FF6347" />
+              <MaterialIcons name="room-service" size={35} color="#FF6347" />
             </View>
             <Text>Hotels</Text>
           </View>
