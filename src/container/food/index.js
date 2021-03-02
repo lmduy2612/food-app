@@ -6,6 +6,7 @@ import ImageHeaderScrollView, {
 } from 'react-native-image-header-scroll-view';
 import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
 const MIN_HEIGHT = Platform.OS === 'ios' ? 90 : 55;
 const MAX_HEIGHT = 350;
@@ -53,6 +54,23 @@ const FoodDetailContainer = ({navigation, route}) => {
             </View>
           ))}
         </View>
+      </View>
+      <View style={[styles.section, {height: 250}]}>
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={{flex: 1}}
+          region={{
+            latitude: 10.7839683,
+            longitude: 106.695345,
+            latitudeDelta: 0.00864,
+            longitudeDelta: 0.00014,
+          }}>
+          <MapView.Marker
+            coordinate={{latitude: 10.7839683, longitude: 106.695345}}
+            title={'SV Company'}
+            description={'SV Company'}
+          />
+        </MapView>
       </View>
     </ImageHeaderScrollView>
   );
