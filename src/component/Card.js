@@ -1,22 +1,31 @@
 import React from 'react';
 import {Text} from 'native-base';
-import {StyleSheet, Image, View} from 'react-native';
+import {StyleSheet, Image, View, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import StarRating from './StarRating';
 
 const Card = ({item}) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.card}>
-      <View style={styles.cardImgWrapper}>
-        <Image source={item.image} resizeMode="cover" style={styles.cardImg} />
+    <TouchableOpacity
+      onPress={() => navigation.navigate('FoodDetail', {item: item})}>
+      <View style={styles.card}>
+        <View style={styles.cardImgWrapper}>
+          <Image
+            source={item.image}
+            resizeMode="cover"
+            style={styles.cardImg}
+          />
+        </View>
+        <View style={styles.cardInfo}>
+          <Text style={styles.cardTitle}>{item.title}</Text>
+          <StarRating ratings={item.rating} reviews={item.reviews} />
+          <Text style={styles.cardDetails} numberOfLines={2}>
+            {item.description}
+          </Text>
+        </View>
       </View>
-      <View style={styles.cardInfo}>
-        <Text style={styles.cardTitle}>{item.title}</Text>
-        <StarRating ratings={item.rating} reviews={item.reviews} />
-        <Text style={styles.cardDetails} numberOfLines={2}>
-          {item.description}
-        </Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

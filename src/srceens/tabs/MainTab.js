@@ -1,6 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeStackScreen from '../stacks/HomeStack';
+import MainStackScreen from '../stacks/MainStack';
 import FooterElement from '../../layout/element/Footer';
 
 const MainTab = createBottomTabNavigator();
@@ -8,9 +8,9 @@ const MainTab = createBottomTabNavigator();
 const MainTabScreen = () => {
   return (
     <MainTab.Navigator
-      initialRouteName="HomeStack"
+      initialRouteName="MainStack"
       tabBar={(props) => <FooterElement {...props} />}>
-      <MainTab.Screen name="HomeStack" component={HomeStackScreen} />
+      <MainTab.Screen name="MainStack" component={MainStackScreen} />
     </MainTab.Navigator>
   );
 };
