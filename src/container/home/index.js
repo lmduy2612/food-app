@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {AsyncStorage, StyleSheet} from 'react-native';
 import {
   Container,
   Header,
@@ -16,6 +16,17 @@ import HomeCategory from './category';
 import HomeNews from './news';
 
 const HomeContainer = (props) => {
+  const isBoarding = async () => {
+    const value = await AsyncStorage.getItem('isBoarding');
+    return JSON.parse(value);
+  };
+  const setBoarding = async () => {
+    await AsyncStorage.setItem('isBoarding', JSON.stringify(true));
+  };
+  if (!isBoarding) {
+    setBoarding();
+  }
+
   return (
     <Container>
       <Header>

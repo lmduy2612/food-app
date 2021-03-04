@@ -1,10 +1,10 @@
 import React from 'react';
 import {useRoute} from '@react-navigation/native';
 import {Icon, Button, FooterTab, Text, Badge, Footer} from 'native-base';
-
 const FooterElement = (props) => {
   const {navigation} = props;
   const route = useRoute();
+
   const navigationBottom = [
     {
       title: 'Home',
