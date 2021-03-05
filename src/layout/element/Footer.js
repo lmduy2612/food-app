@@ -3,18 +3,17 @@ import {useRoute} from '@react-navigation/native';
 import {Icon, Button, FooterTab, Text, Badge, Footer} from 'native-base';
 const FooterElement = (props) => {
   const {navigation} = props;
-  const route = useRoute();
 
   const navigationBottom = [
     {
       title: 'Home',
       icon: 'home',
-      navigate: 'Home',
+      navigate: 'MainStack',
     },
     {
       title: 'Message',
       icon: 'chatbox-outline',
-      navigate: 'Message',
+      navigate: 'MessageStack',
       badge: 10,
     },
     {
@@ -28,6 +27,18 @@ const FooterElement = (props) => {
       navigate: 'Contact',
     },
   ];
+
+  const state = navigation.dangerouslyGetState();
+  let actualRoute = state.routes[state.index];
+
+  while (actualRoute.state) {
+    actualRoute = actualRoute.state.routes[actualRoute.state.index];
+  }
+
+  if (['MessageDetail'].includes(actualRoute.name)) {
+    return null;
+  }
+
   return (
     <Footer>
       <FooterTab>
@@ -36,7 +47,7 @@ const FooterElement = (props) => {
             vertical
             badge={!!item?.badge}
             onPress={() => navigation.navigate(item.navigate)}
-            active={route.name === item.navigate}
+            active={actualRoute.name === item.navigate}
             key={idx.toString()}>
             {item?.badge && (
               <Badge>
