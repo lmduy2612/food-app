@@ -10,8 +10,8 @@ const OnboardingScreen = (props) => (
   <>
     <StatusBar animated={true} barStyle="dark-content" backgroundColor="#fff" />
     <Onboarding
-      onSkip={() => props.navigation.navigate('MainTab')}
-      onDone={() => props.navigation.navigate('MainTab')}
+      onSkip={() => props.navigation.navigate('Login')}
+      onDone={() => props.navigation.navigate('Login')}
       pages={[
         {
           backgroundColor: '#fff',

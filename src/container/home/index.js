@@ -1,5 +1,5 @@
-import React from 'react';
-import {AsyncStorage, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet} from 'react-native';
 import {
   Container,
   Header,
@@ -11,6 +11,7 @@ import {
   Body,
   Icon,
 } from 'native-base';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeBanner from './banner';
 import HomeCategory from './category';
 import HomeNews from './news';
