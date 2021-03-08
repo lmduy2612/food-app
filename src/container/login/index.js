@@ -55,7 +55,7 @@ const LoginContainer = (props) => {
       <Content>
         {loading && <Spinner style={styles.loading} color="blue" />}
         <Form>
-          <Item floatingLabel>
+          <Item>
             <Label>Email</Label>
             <Input
               name="email"
@@ -64,7 +64,7 @@ const LoginContainer = (props) => {
               autoCapitalize="none"
             />
           </Item>
-          <Item floatingLabel last>
+          <Item last>
             <Label>Password</Label>
             <Input
               name="password"
@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
   },
   textError: {
     color: 'red',
+    paddingVertical: 15,
   },
   loading: {
     position: 'absolute',

@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useEffect} from 'react';
-import {StyleSheet, View, Image} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {GiftedChat, Send} from 'react-native-gifted-chat';
 import {
   Body,
@@ -11,11 +11,47 @@ import {
   Right,
   Title,
 } from 'native-base';
-
-import mesData from '../../model/message';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {firebase} from '../../firebase';
 
 const MessageDetailContainer = ({navigation, route}) => {
   const [messages, setMessages] = useState([]);
+  const [user, setUser] = useState(null);
+
+  const createMessage = async (msg) => {
+    const data = {...msg[0], createdAt: new Date(msg[0].createdAt).getTime()};
+    await firebase.database().ref().child('messages').push(data);
+    return true;
+  };
+
+  const onSend = useCallback((msg = []) => {
+    createMessage(msg).then(() => {});
+  }, []);
+
+  const snapshotToArray = (snapshots) => {
+    if (!snapshots) {
+      return [];
+    }
+    return Object.keys(snapshots)
+      ?.map((key) => snapshots[key])
+      .reverse();
+  };
+
+  const getMessageOfUser = async () => {
+    const userAuth = await AsyncStorage.getItem('userAuth');
+    if (userAuth) {
+      await firebase
+        .database()
+        .ref()
+        .child('messages')
+        .orderByChild('createdAt')
+        .limitToLast(40)
+        .on('value', (snapshot) => {
+          setMessages(snapshotToArray(snapshot.val()));
+        });
+    }
+    setUser(JSON.parse(userAuth));
+  };
 
   const btnSend = (props) => (
     <Send {...props}>
@@ -26,11 +62,7 @@ const MessageDetailContainer = ({navigation, route}) => {
   );
 
   useEffect(() => {
-    setMessages(mesData);
-  }, []);
-
-  const onSend = useCallback((msg = []) => {
-    setMessages((previousMessages) => GiftedChat.append(previousMessages, msg));
+    getMessageOfUser().then(() => {});
   }, []);
 
   return (
@@ -50,14 +82,16 @@ const MessageDetailContainer = ({navigation, route}) => {
           </Button>
         </Right>
       </Header>
-      <GiftedChat
-        messages={messages}
-        onSend={(msg) => onSend(msg)}
-        user={{
-          _id: 1,
-        }}
-        renderSend={btnSend}
-      />
+      {user && (
+        <GiftedChat
+          messages={messages}
+          onSend={(msg) => onSend(msg)}
+          user={{
+            _id: user?.uid,
+          }}
+          renderSend={btnSend}
+        />
+      )}
     </Container>
   );
 };
