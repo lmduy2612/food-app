@@ -1,9 +1,12 @@
 import React, {useEffect} from 'react';
+import {LogBox} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {firebase} from './src/firebase';
+
+LogBox.ignoreAllLogs();
 
 import OnboardingScreen from './src/srceens/OnboaringScreen';
 import MainTabScreen from './src/srceens/tabs/MainTab';
