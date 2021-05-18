@@ -9,7 +9,7 @@ const MainTab = createBottomTabNavigator();
 const MainTabScreen = () => {
   return (
     <MainTab.Navigator
-      initialRouteName="MessageStack"
+      initialRouteName="MainStack"
       tabBar={(props) => <FooterElement {...props} />}>
       <MainTab.Screen name="MainStack" component={MainStackScreen} />
       <MainTab.Screen name="MessageStack" component={MessageStackScreen} />
